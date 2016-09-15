@@ -68,8 +68,7 @@ def perform_operation(op_list):
 		elif operand == '/':
 			variable_list[ada_index(destination)] = val1 / val2
 
-		print '#' + str(op_list[0]) + ': ' + str(val1) + ' ' + op_list[1] + ' ' +str(val2) + ' = ' + str(variable_list[ada_index(destination)]) + '(indices: ' + str(op_list[2]) + ', ' + str(op_list[3]) + ', ' + str(destination) + ')'
-		#print "Operation #{1} -- {2} {3} {4} = {5} (indices: {6}, {7}, {8})".format(op_list[0], val1, op_list[1], val2, variable_list[ada_index(destination)], op_list[2], op_list[3], destination)
+		print "Operation #{0} -- {1} {2} {3} = {4} (indices: {5}, {6}, {7})".format(op_list[0], val1, op_list[1], val2, variable_list[ada_index(destination)], op_list[2], op_list[3], destination)
 
 
 #todo: Implement looping based on structure in diagram
