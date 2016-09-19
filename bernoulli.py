@@ -5,8 +5,16 @@ value_of_n = input('Enter a value for n: ')
 
 variable_list = [1.0, 2.0, 1.0] #We start with n = 1 and work up to n = value_of_n
 
-#The number of variable locations should equal 20 + n.  Since we've initialized it with 2 variables already, range should be 18 + n:
-for x in range(17 + value_of_n):
+#The total number of variable locations should equal 20 + n, with a minimum of 24.  
+#Since we've initialized it with 3 variables already, we need to add 21 more locations if n < 4
+#If n >= 4, we add 21 + (n-4)
+if n < 4:
+	var_range = 21
+else:
+	var_range = 21 + (value_of_n - 4)
+
+#Add the appropriate number of variable slots
+for x in range(var_range):
 	variable_list.append(0.0)
 
 print('Number of variable slots: ' + str(len(variable_list)))
