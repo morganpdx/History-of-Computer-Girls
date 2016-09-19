@@ -57,16 +57,16 @@ def perform_operation(op_list):
 	for destination in op_list[4]:
 
 		if operand == '+':
-			variable_list[ada_index(destination)] = val1 + val2
+			variable_list[ada_index(destination)] = float(val1) + float(val2)
 
 		elif operand == '-':
-			variable_list[ada_index(destination)] = val1 - val2			
+			variable_list[ada_index(destination)] = float(val1) - float(val2)
 
 		elif operand == '*':
-			variable_list[ada_index(destination)] = val1 * val2
+			variable_list[ada_index(destination)] = float(val1) * float(val2)
 
 		elif operand == '/':
-			variable_list[ada_index(destination)] = val1 / val2
+			variable_list[ada_index(destination)] = float(val1) / float(val2)
 
 		print "Operation #{0} -- {1} {2} {3} = {4} (indices: {5}, {6}, {7})".format(op_list[0], val1, op_list[1], val2, variable_list[ada_index(destination)], op_list[2], op_list[3], destination)
 
