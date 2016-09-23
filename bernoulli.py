@@ -80,7 +80,7 @@ def loop_operations():
 	while variable_list[ada_index(3)] <= value_of_n:
 		calculate_numbers(1, 25)
 
-	#Print out final values of B for each index
+	#Print out final values of B for each index, starting with B index 1 at variable location 21
 	for i in range(21, len(operations_list)-1):
 		index_number = (2 * (i - 20)) - 1
 		print "Value of B, index {0} is {1}".format(index_number, variable_list[ada_index(i)])
