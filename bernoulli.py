@@ -5,13 +5,9 @@ value_of_n = input('Enter a value for n: ')
 
 variable_list = [1.0, 2.0, 1.0] #We start with n = 1 and work up to n = value_of_n
 
-#The total number of variable locations should equal 20 + n, with a minimum of 24.  
-#Since we've initialized it with 3 variables already, we need to add 21 more locations if n < 4
-#If n >= 4, we add 21 + (n-4)
-if n < 4:
-	var_range = 21
-else:
-	var_range = 21 + (value_of_n - 4)
+#The total number of variable locations should equal 20 + n 
+#Since we've initialized it with 3 variables already, we need to add 17 + value_of_n
+var_range = 17 + value_of_n
 
 #Add the appropriate number of variable slots
 for x in range(var_range):
@@ -23,7 +19,6 @@ print('Number of variable slots: ' + str(len(variable_list)))
 # All Ada's indexes are 1 based, so for ease of recording subtract 1 from all indexes listed in the diagram
 def ada_index(index):
 	return index - 1
-
 
 #Line number, operation, operand 1, operand 2, index to store result(s) 
 operations_list = [
@@ -48,14 +43,14 @@ operations_list = [
 	[19, '/', 6, 7, [9]],
 	[20, '*', 9, 11, [11]],
 	[21, '*', 22, 11, [12]],
-	[22, '+', 12, 13, [13]], #This should result in B index n during the second pass, where n > 2, and stored in index 20+n according to diagram
+	[22, '+', 12, 13, [13]], #This should result in B index n during the second pass, where n > 2, and stored in index 20+ according to diagram
 	[23, '-', 10, 1, [10]], #This operation determines if the engine continues processing.  if n > 2, it will equal zero, which means start over at operation 1 (or stop).
-	[24, '+', 13, 24, [24]], # 24 and 25 complete processing and prepare for the next iteration, if any.
-	[25, '+', 1, 3, [3]] 	
+	[24, '+', 13, 20 + int(variable_list[ada_index(3)]), [int(20 + variable_list[ada_index(3)])]], # This saves the value of B(index of value_of_n) to variable_list[20+value_of_n]
+	[25, '+', 1, 3, [3]] 	#This iterates to the next value of value_of_n
 ]
 
 #Perform the selected operation, report and save the results
-def perform_operation(op_list):
+def perform_operation(op_list, start_operation, end_operation):
 
 	operand = op_list[1]
 	val1 = variable_list[ada_index(op_list[2])]
@@ -80,15 +75,24 @@ def perform_operation(op_list):
 
 
 #todo: Implement looping based on structure in diagram
+def loop_operations():
 
-def calculate_numbers():
-	i = 0
-	while i < len(operations_list):
-		perform_operation(operations_list[i])
-		i = i + 1
+	while variable_list[ada_index(3)] <= value_of_n:
+		calculate_numbers(1, 25)
+
+	#Print out final values of B for each index
+	for i in range(21, len(operations_list)-1):
+		index_number = (2 * (i - 20)) - 1
+		print "Value of B, index {0} is {1}".format(index_number, variable_list[ada_index(i)])
 
 
-calculate_numbers()
+def calculate_numbers(start, stop):
+
+	for i in range(start-1, stop):
+		perform_operation(operations_list[i], 1, 25)
+
+
+loop_operations()
 
 
 
